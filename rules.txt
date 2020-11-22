@@ -1,0 +1,140 @@
+sales transact proc:
+    User: 
+        nickname,
+        full name,
+        email,
+        city,
+        description,
+        id number = "USRXXX" X=0-9
+
+    Sales transact:
+        user,
+        transact date,
+        movie name,
+        quantity,
+        sales id = "SALXXX" X=0-9
+    
+    *user may purchase more than 1 movie.
+
+Movie:
+    Movie:
+        Director,
+        Publisher,
+        Title,
+        description,
+        release date,
+        price,
+        id number = "MOVXXX" X=0-9
+    
+    Director:
+        Name,
+        email,
+        city,
+        address,
+        phone number,
+        id number = "DIRXXX" X=0-9
+    
+    Publisher:
+        name,
+        email,
+        city,
+        address,
+        phone number,
+        id number = "PUBXXX" X=0-9
+    
+    genre:
+        name,
+        id number = "GENXXX" X=0-9
+
+    *every movie may have more than one genre.
+
+User can review a movie:
+    > user may only leave one review for every movie.
+    > Review:
+        user,
+        movie,
+        recommendation status,
+        review content,
+        date
+
+Notes:
+user nickname       =len >5
+user email          =like '%@%'
+Publisher address   =len>15
+Publisher phone     =must be numeric
+Director email      =like '%@%'
+Director phone      =must be numeric
+Movie description   =len>20
+Movie release       =2000<year<2016
+review content      =len>20
+
+a.
+ERD
+> maintain sales transact and review transact
+
+b.
+DDL(create)
+> relevant w/ sales transact
+
+c.
+DML syntax
+Master table min. 10 data
+Transaction table min. 15 data
+Transaction detail/Mapping table min. 25 data
+recommendation status filled with recommended / not recommended
+
+d. DML syntax
+simulate transaction process for:
+Sales Transaction
+Review Transaction
+
+*> c dan d harus di query yang berbeda
+
+e. query kasus
+    1. display
+        movieID movieTitle MovieDescription Reviews 
+       dri user yang tinggal di "Bandung"
+       dan rekomendasinya "Not "Recommended"
+
+       reviews -> total review + 'review(s)'
+
+    2. display
+        GenreID GenreName TotalMovie
+       dri director yang IDnya di antara DIR004 - DIR008
+       dan date month=February
+    
+       TotalMovie -> count movie
+
+    3. display 
+        DirectorID DirectorName LocalPhone MovieSold TotalTransaction
+       dari director yang IDnya di antara DIR003 - DIR009
+       dan MovieSold > 20
+
+       LocalPhone -> 0 pertama (0812) diubah menjadi +62 (+62878)
+       MovieSold -> sum quantity
+       TotalTransaction -> count transaction
+
+    4. display
+        UserNickname "User City" "Total Movie Purchased" "Movie Owned"
+       dari user yang IDnya USR002 atau USR003 
+       dan membeli movie yang rilis pada bulan ganjil (1,3,5,7,9,11)
+
+        User City -> UserCity dalam format uppercase
+        Total Movie Purchased -> sum quantity
+        Movie Owned -> count movie
+
+    5. display
+        "Numeric User ID" Nickname UserCity
+        dari setiap user yang membeli movie di atas rata-rata movie yang terjual
+        dan nickname mengandung character '1'
+
+        Numeric User ID -> 3 character terakhir dari UserId 
+        Nickname -> UserNickname dalam format uppercase
+
+    6.  display
+        MovieID MovieTitle PublisherName "Publisher Email"
+        dari setiap movie yang dijual dengan quantity > max quantity transaction yang terjadi tanggal 22 di bulan itu
+
+        Publisher Email -> diambil dari character sebelum '@'
+
+    7. 
