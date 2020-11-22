@@ -123,6 +123,8 @@ e. query kasus
         Total Movie Purchased -> sum quantity
         Movie Owned -> count movie
 
+>alias subquery untuk nomor 5-8
+
     5. display
         "Numeric User ID" Nickname UserCity
         dari setiap user yang membeli movie di atas rata-rata movie yang terjual
@@ -137,4 +139,32 @@ e. query kasus
 
         Publisher Email -> diambil dari character sebelum '@'
 
-    7. 
+    7. display
+       DirectorID, DirectorName, "Movie Title", "Total Genre" 
+       dari setiap director yang membuat movie yang release date < max(release date = month september)
+
+       Movie Title-> MovieTitle dalam format lower case
+       Total Genre->count Genre + " genre(s)"
+
+    8. display 
+       UserNickname "User First Name" "Total Quantity"
+       dari setiap user yang membeli movie dengan total quantity >= max quantity ( transaction  where date = 20)
+
+       User First Name -> kata pertama dari UserFullName
+       Total Quantity -> sum quantity
+
+    9. create view "CustomUserViewer"
+       UserID UserNickname "Maximum Quantity" "Minimum Quantity"
+       untuk setiap transaction di tanggal 19 
+       dan user nickname contains 'h'
+
+       Maximum Quantity -> maximum quantity sold
+       Minimum Quantity -> minimum quantity sold
+
+    10. create view "CustomPublisherViewer"
+        PublisherName MovieTitle "Release Date" "Total Purchase" "Minimum Purchase"
+        untuk setiap publisher dari jakarta yang movienya release di juli
+
+        Release Date -> MovieReleaseDate dengan format dd Mon yyyy
+        Total Purchase -> Sum quantity
+        Minimum Purchase -> minimum quantity
