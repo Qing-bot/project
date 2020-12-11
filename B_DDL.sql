@@ -52,7 +52,7 @@ CREATE TABLE [Movie Genre Details] (
 CREATE TABLE Review (
     UserID char(5) NOT NULL CHECK (UserID LIKE 'USR[0-9][0-9][0-9]'), 
     MovieID char(5) NOT NULL CHECK (MovieID LIKE 'MOV[0-9][0-9][0-9]'), 
-    [Recommendation status] varchar(255) NOT NULL , 
+    [Recommendation status] varchar(255) NOT NULL CHECK([Recommendation status] = 'Recommended' or [Recommendation status] = 'Not Recommended') , 
     [Review content] varchar(255) NOT NULL CHECK(len>20), 
     [Date] datetime NOT NULL, 
     PRIMARY KEY (UserID, MovieID));
