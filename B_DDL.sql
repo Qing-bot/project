@@ -4,7 +4,7 @@ USE BakMovie;
 
 CREATE TABLE [User] (
     UserID char(5) NOT NULL CHECK (UserID LIKE'USR[0-9][0-9][0-9]'), 
-    NickName varchar(255) NOT NULL CHECK (LEN>5) , 
+    NickName varchar(255) NOT NULL CHECK (LEN(NickName)>5) , 
     FullName varchar(255) NOT NULL, 
     Email varchar(255) NULL CHECK (Email LIKE'%@%'), 
     City varchar(255) NULL, 
@@ -30,7 +30,7 @@ CREATE TABLE Publisher (
     [Name] varchar(255) NOT NULL, 
     Email varchar(255) NOT NULL CHECK (Email like '%@%'), 
     City varchar(255) NULL, 
-    [Address] varchar(255) NULL CHECK (LEN>15), 
+    [Address] varchar(255) NULL CHECK (LEN([Address])>15), 
     PhoneNumber numeric(19, 0) NULL, 
     PRIMARY KEY (PublisherID));
 
@@ -39,7 +39,7 @@ CREATE TABLE Movie (
     Director char(5) NOT NULL CHECK (Director LIKE 'DIR[0-9][0-9][0-9]'), 
     Publisher char(5) NOT NULL CHECK (Publisher LIKE 'PUB[0-9][0-9][0-9]'), 
     Title varchar(255) NOT NULL, 
-    [Description] varchar(255) NOT NULL CHECK (LEN>20), 
+    [Description] varchar(255) NOT NULL CHECK (LEN([Description])>20), 
     ReleaseDate datetime NOT NULL CHECK( year(ReleaseDate)>2000 AND year(ReleaseDate)<2016), 
     Price numeric(19, 0) NULL, 
     PRIMARY KEY (MovieID));
@@ -53,7 +53,7 @@ CREATE TABLE Review (
     UserID char(5) NOT NULL CHECK (UserID LIKE 'USR[0-9][0-9][0-9]'), 
     MovieID char(5) NOT NULL CHECK (MovieID LIKE 'MOV[0-9][0-9][0-9]'), 
     [Recommendation status] varchar(255) NOT NULL CHECK([Recommendation status] = 'Recommended' or [Recommendation status] = 'Not Recommended') , 
-    [Review content] varchar(255) NOT NULL CHECK(len>20), 
+    [Review content] varchar(255) NOT NULL CHECK(len([Review content])>20), 
     [Date] datetime NOT NULL, 
     PRIMARY KEY (UserID, MovieID));
 
